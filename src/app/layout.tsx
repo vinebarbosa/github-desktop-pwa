@@ -1,4 +1,6 @@
+import { fontSans } from '@/lib/font';
 import './globals.css';
+import { Providers } from '@/components/providers';
 import type { Metadata } from 'next';
 import type { PropsWithChildren } from 'react';
 
@@ -10,7 +12,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body className={fontSans.className}>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }
