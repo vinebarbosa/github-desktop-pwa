@@ -6,7 +6,7 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground rounded-3xl hover:bg-primary/90 leading-5',
-        link: 'p-0 gap-4 text-xl justify-start text-muted -tracking-[6%]'
+        link: 'py-0 px-0 gap-4 text-xl justify-start w-full text-muted -tracking-[6%]'
       },
       size: {
         default: 'h-10.5 px-10 py-3',
@@ -16,6 +16,13 @@ export const buttonVariants = cva(
     defaultVariants: {
       variant: 'default',
       size: 'default'
-    }
+    },
+    compoundVariants: [
+      {
+        variant: 'link',
+        size: 'default',
+        class: 'p-0'
+      }
+    ]
   }
 );

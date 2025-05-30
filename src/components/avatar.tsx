@@ -10,7 +10,7 @@ function Avatar({ className, ...props }: ComponentProps<typeof AvatarPrimitive.R
     <AvatarPrimitive.Root
       data-slot="avatar"
       className={mergeClasses(
-        'relative flex size-32 shrink-0 overflow-hidden rounded-full',
+        'relative flex size-16 shrink-0 overflow-hidden rounded-full',
         className
       )}
       {...props}
@@ -33,7 +33,7 @@ function AvatarFallback({ className, ...props }: ComponentProps<typeof AvatarPri
     <AvatarPrimitive.Fallback
       data-slot="avatar-fallback"
       className={mergeClasses(
-        'bg-accent flex size-full items-center justify-center rounded-full text-6xl',
+        'bg-accent flex size-full items-center justify-center rounded-full text-regular',
         className
       )}
       {...props}
