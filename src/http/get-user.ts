@@ -1,6 +1,6 @@
 interface GetUserParams {
   authorizationToken?: string;
-  username: string;
+  username?: string;
 }
 
 export interface UserData {
@@ -18,12 +18,16 @@ export async function getUser({ username, authorizationToken }: GetUserParams): 
     headers.Authorization = `Bearer ${authorizationToken}`;
   }
 
-  const response = await fetch(`https://api.github.com/users/${username}`, {
+  const url = username ? `https://api.github.com/users/${username}` : 'https://api.github.com/user'
+  const tag = username ? `user-${username}` : 'user'
+
+  const response = await fetch(url, {
     method: 'GET',
     headers: headers,
     next: {
-      tags: [`user-${username}`]
+      tags: [tag]
     },
+    cache: 'force-cache'
   });
 
   if (!response.ok) {
