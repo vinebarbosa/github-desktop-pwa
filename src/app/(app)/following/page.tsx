@@ -3,8 +3,7 @@ import { getFollowingUsers } from '@/http/get-following-users';
 import { getUser } from '@/http/get-user';
 import { auth } from '@/lib/auth';
 
-import { Skeleton } from '@/components/skeleton';
-import { FollowedUserCard } from '../../../components/followed-user-card';
+import { FollowedUserCard } from '@/components/followed-user-card';
 
 export default async function FollowingUsersPage() {
   const session = await auth();

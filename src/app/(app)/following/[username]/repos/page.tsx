@@ -1,13 +1,11 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar';
+import { BackButton } from '@/components/back-button';
 import { Header } from '@/components/header';
 import { getUser } from '@/http/get-user';
 import { auth } from '@/lib/auth';
-import { BackButton } from '../../../../../components/back-button';
 
 interface FollowingRepositoriesPageProps {
-  params: Promise<{
-    username: string;
-  }>;
+  params: Promise<{ username: string }>;
 }
 
 export default async function FollowingRepositoriesPage({ params }: FollowingRepositoriesPageProps) {
@@ -17,6 +15,7 @@ export default async function FollowingRepositoriesPage({ params }: FollowingRep
   const authorizationToken = session?.accessToken;
 
   const user = await getUser({ username, authorizationToken });
+  const avatarFallback = user.name?.charAt(0).toUpperCase()
 
   return (
     <div className="flex flex-1">
@@ -24,7 +23,7 @@ export default async function FollowingRepositoriesPage({ params }: FollowingRep
         <BackButton>{user.name}</BackButton>
         <Avatar>
           <AvatarImage src={user.avatar_url} />
-          <AvatarFallback className="text-regular">VC</AvatarFallback>
+          <AvatarFallback className="text-base">{avatarFallback}</AvatarFallback>
         </Avatar>
       </Header>
     </div>
