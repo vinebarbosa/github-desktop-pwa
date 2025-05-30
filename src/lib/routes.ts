@@ -1,5 +1,5 @@
 export const ROUTES = {
-  signIn: "/auth/sign-in",
+  signIn: "/",
   profile: "/profile",
   repositories: "/repos",
   followingUsers: "/following",
