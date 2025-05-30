@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans" sans-serif;
+  --color-background: #090707;
+  --color-foreground: #ffffff;
+  --color-primary: #f5f5f5;
+  --color-primary-foreground: #181414;
+  --color-muted: #949EA2;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  button {
+    @apply cursor-pointer;
+  }
+}
