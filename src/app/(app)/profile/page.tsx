@@ -12,13 +12,13 @@ export default async function ProfilePage() {
 
   return (
     <form
-      className="flex flex-1 items-center justify-center flex-col gap-6"
+      className="flex flex-1 h-full items-center justify-center flex-col gap-6"
       action={async () => {
         'use server';
         await signOut({ redirectTo: ROUTES.signIn });
       }}
     >
-      <Avatar>
+      <Avatar className='size-32'>
         {avatar && <AvatarImage src={avatar} />}
         <AvatarFallback>{usernameFallback}</AvatarFallback>
       </Avatar>
