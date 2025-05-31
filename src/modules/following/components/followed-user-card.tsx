@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar';
-import type { UserData } from '@/http/get-user';
-import { ROUTES } from '@/lib/routes';
+import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar';
+import type { UserData } from '@/modules/shared/http/get-user';
+import { ROUTES } from '@/modules/shared/routes';
 import Link from 'next/link';
 
 type FollowedUserCardProps = {
@@ -18,7 +18,7 @@ export async function FollowedUserCard({ getUser }: FollowedUserCardProps) {
           <AvatarFallback className="bg-muted" />
         </Avatar>
 
-        <span className='text-sm leading-5 tracking-[1%]'>{user.name}</span>
+        <span className="text-sm leading-5 tracking-[1%]">{user.name}</span>
       </Link>
     </li>
   );

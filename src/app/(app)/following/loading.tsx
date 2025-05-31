@@ -1,5 +1,5 @@
-import { Header, HeaderDescription, HeaderTitle } from '@/components/header';
-import { Skeleton } from '@/components/skeleton';
+import { Header, HeaderDescription, HeaderTitle } from '@/modules/shared/components/header';
+import { Skeleton } from '@/modules/shared/components/ui/skeleton';
 
 export default function FollowingUsersPageLoading() {
   return (

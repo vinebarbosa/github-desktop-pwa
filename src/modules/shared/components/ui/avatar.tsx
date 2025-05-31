@@ -2,7 +2,7 @@
 
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 
-import { mergeClasses } from '@/lib/tailwind';
+import { mergeClasses } from '@/modules/shared/utils/tailwind';
 import type { ComponentProps } from 'react';
 
 function Avatar({ className, ...props }: ComponentProps<typeof AvatarPrimitive.Root>) {

@@ -1,4 +1,4 @@
-import { mergeClasses } from '@/lib/tailwind';
+import { mergeClasses } from '@/modules/shared/utils/tailwind';
 import type { PropsWithChildren } from 'react';
 
 interface RepositoriesListProps extends PropsWithChildren {
