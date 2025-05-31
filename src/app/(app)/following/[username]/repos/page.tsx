@@ -1,12 +1,12 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar';
-import { BackButton } from '@/components/back-button';
-import { Header } from '@/components/header';
-import { RepositoriesList } from '@/components/repositories-list';
-import { RepositoriesListItem } from '@/components/repositories-list-item';
+import { BackButton } from '@/modules/following/components/back-button';
+import { RepositoriesList } from '@/modules/repos/components/repositories-list';
+import { RepositoriesListItem } from '@/modules/repos/components/repositories-list-item';
+import { Header } from '@/modules/shared/components/header';
+import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar';
 
-import { getUser } from '@/http/get-user';
-import { getUserRepositories } from '@/http/get-user-repositories';
-import { auth } from '@/lib/auth';
+import { auth } from '@/modules/auth';
+import { getUserRepositories } from '@/modules/repos/http/get-user-repositories';
+import { getUser } from '@/modules/shared/http/get-user';
 interface FollowingRepositoriesPageProps {
   params: Promise<{ username: string }>;
 }

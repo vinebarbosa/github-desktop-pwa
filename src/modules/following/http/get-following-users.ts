@@ -1,4 +1,3 @@
-
 export interface GetFollowingUsersParams {
   username: string;
   authorizationToken?: string;
@@ -14,7 +13,7 @@ export async function getFollowingUsers({
   authorizationToken
 }: GetFollowingUsersParams): Promise<FollowingUserData[]> {
   const headers: HeadersInit = {
-    'Accept': 'application/vnd.github.v3+json',
+    Accept: 'application/vnd.github.v3+json'
   };
 
   if (authorizationToken) {

@@ -1,4 +1,4 @@
-import { mergeClasses } from '@/lib/tailwind';
+import { mergeClasses } from '@/modules/shared/utils/tailwind';
 import { Slot } from '@radix-ui/react-slot';
 import type { VariantProps } from 'class-variance-authority';
 import { buttonVariants } from './button-variants';

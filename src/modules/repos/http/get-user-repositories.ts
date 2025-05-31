@@ -9,7 +9,7 @@ export interface UserRepositoriesData {
   description: string | null;
   owner: {
     login: string;
-  }
+  };
 }
 
 export async function getUserRepositories({
@@ -17,8 +17,8 @@ export async function getUserRepositories({
   authorizationToken
 }: GetUserRepositoriesParams): Promise<UserRepositoriesData[]> {
   const headers: HeadersInit = {
-    'Accept': 'application/vnd.github.v3+json',
-    'User-Agent': 'GitHubViewerApp',
+    Accept: 'application/vnd.github.v3+json',
+    'User-Agent': 'GitHubViewerApp'
   };
 
   if (authorizationToken) {

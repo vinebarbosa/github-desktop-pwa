@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
-import GitHub from "next-auth/providers/github"
-import { ROUTES } from "./routes";
+import { ROUTES } from "../../modules/shared/routes";
+import GitHub from "./github-provider";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [GitHub],
@@ -11,12 +11,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     authorized: async ({ auth }) => {
       return !!auth
     },
-    async jwt({ token, account, profile }) {
-      if (profile?.login) {
-        token.userId = profile.login as string
-      }
+    async jwt({ token, account }) {
       if (account) {
         token.accessToken = account.access_token;
+        token.userId = account.providerAccountId;
       }
       return token;
     },

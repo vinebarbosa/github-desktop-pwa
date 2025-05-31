@@ -1,7 +1,7 @@
-import { ROUTES } from '@/lib/routes';
+import { ROUTES } from '@/modules/shared/routes';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from './button';
+import { Button } from './ui/button';
 
 export function Sidebar() {
   return (

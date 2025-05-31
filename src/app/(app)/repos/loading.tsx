@@ -3,9 +3,9 @@ import { Skeleton } from '@/modules/shared/components/ui/skeleton';
 export default function FollowingRepositoriesPageLoading() {
   return (
     <div className="flex flex-col flex-1 space-y-4">
-      <div className="flex justify-between items-center w-full space-y-2 p-8">
-        <Skeleton className="h-8 w-40" />
-        <Skeleton className="size-16 rounded-full" />
+      <div className="p-8">
+        <Skeleton className="h-7 w-40 mb-2" />
+        <Skeleton className="h-4 w-40" />
       </div>
 
       <ul className="px-8 space-y-4">
