@@ -1,31 +1,54 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/avatar';
 import { BackButton } from '@/components/back-button';
 import { Header } from '@/components/header';
-import { getUser } from '@/http/get-user';
-import { auth } from '@/lib/auth';
+import { RepositoriesList } from '@/components/repositories-list';
+import { RepositoriesListItem } from '@/components/repositories-list-item';
 
+import { getUser } from '@/http/get-user';
+import { getUserRepositories } from '@/http/get-user-repositories';
+import { auth } from '@/lib/auth';
 interface FollowingRepositoriesPageProps {
   params: Promise<{ username: string }>;
 }
 
-export default async function FollowingRepositoriesPage({ params }: FollowingRepositoriesPageProps) {
+export default async function FollowingRepositoriesPage({
+  params
+}: FollowingRepositoriesPageProps) {
   const session = await auth();
-  const username = (await params).username;
 
-  const authorizationToken = session?.accessToken;
+  const requestParams = {
+    username: (await params).username,
+    authorizationToken: session?.accessToken
+  };
 
-  const user = await getUser({ username, authorizationToken });
-  const avatarFallback = user.name?.charAt(0).toUpperCase()
+  const [user, userRepositories] = await Promise.all([
+    getUser(requestParams),
+    getUserRepositories(requestParams)
+  ]);
+
+  const avatarFallback = user.name?.charAt(0).toUpperCase();
 
   return (
-    <div className="flex flex-1">
+    <div className="flex flex-col flex-1 space-y-4">
       <Header className="flex-row">
-        <BackButton>{user.name}</BackButton>
+        <BackButton>
+          <h1 className="text-base">{user.name}</h1>
+        </BackButton>
         <Avatar>
           <AvatarImage src={user.avatar_url} />
           <AvatarFallback className="text-base">{avatarFallback}</AvatarFallback>
         </Avatar>
       </Header>
+
+      <RepositoriesList>
+        {userRepositories.map((repository) => (
+          <RepositoriesListItem
+            key={repository.id}
+            description={repository.description}
+            name={repository.name}
+          />
+        ))}
+      </RepositoriesList>
     </div>
   );
 }
