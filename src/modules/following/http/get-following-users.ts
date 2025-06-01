@@ -1,6 +1,11 @@
+import type { PaginatedResult } from '@/modules/shared/types/paginated-result';
+import { applyPaginationParams, getPaginationStatus } from '@/modules/shared/utils/pagination';
+
 export interface GetFollowingUsersParams {
   username: string;
   authorizationToken?: string;
+  page: number;
+  perPage?: number;
 }
 
 export interface FollowingUserData {
@@ -10,8 +15,10 @@ export interface FollowingUserData {
 
 export async function getFollowingUsers({
   username,
-  authorizationToken
-}: GetFollowingUsersParams): Promise<FollowingUserData[]> {
+  authorizationToken,
+  page,
+  perPage = 10
+}: GetFollowingUsersParams): Promise<PaginatedResult<FollowingUserData>> {
   const headers: HeadersInit = {
     Accept: 'application/vnd.github.v3+json'
   };
@@ -20,8 +27,16 @@ export async function getFollowingUsers({
     headers.Authorization = `Bearer ${authorizationToken}`;
   }
 
+  const url = applyPaginationParams({
+    url: `https://api.github.com/users/${username}/following`,
+    page,
+    perPage
+  })
+
+  console.log(url)
+
   try {
-    const response = await fetch(`https://api.github.com/users/${username}/following`, {
+    const response = await fetch(url, {
       method: 'GET',
       headers: headers,
       next: {
@@ -43,7 +58,14 @@ export async function getFollowingUsers({
     }
 
     const data: FollowingUserData[] = await response.json();
-    return data;
+    const linkHeader = response.headers.get('Link');
+
+    const paginationStatus = getPaginationStatus({
+      apiPageNum: page,
+      linkHeader
+    });
+
+    return [data, paginationStatus];
   } catch (error) {
     console.error('Erro na função getFollowingUsers:', error);
     throw error;
