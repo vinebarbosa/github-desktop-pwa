@@ -29,12 +29,18 @@ export function CreateRepositoryForm({
   }
 
   return (
-    <form className="flex flex-col items-center" onSubmit={handleSubmit}>
+    <form
+      className="flex flex-col items-center"
+      onSubmit={handleSubmit}
+      data-testid="create-repository-form"
+
+    >
       <div className="flex flex-col w-full items-center px-8 py-16 space-y-6">
-        <label htmlFor="" className="font-medium text-sm leading-5 tracking-[1%]">
+        <label htmlFor="name" className="font-medium text-sm leading-5 tracking-[1%]">
           Dê um nome ao seu repositório
         </label>
         <input
+          id="name"
           type="text"
           name="name"
           className="
