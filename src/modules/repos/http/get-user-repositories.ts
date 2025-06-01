@@ -1,4 +1,5 @@
-import { type PaginationStatus, getPaginationStatus } from '@/modules/shared/utils/pagination';
+import type { PaginatedResult } from '@/modules/shared/types/paginated-result';
+import { applyPaginationParams, getPaginationStatus } from '@/modules/shared/utils/pagination';
 
 export interface GetUserRepositoriesParams {
   username: string;
@@ -16,14 +17,12 @@ export interface UserRepositoriesData {
   };
 }
 
-export type PaginatedRepositoriesResult = [UserRepositoriesData[], PaginationStatus];
-
 export async function getUserRepositories({
   username,
   authorizationToken,
   page,
   perPage = 10
-}: GetUserRepositoriesParams): Promise<PaginatedRepositoriesResult> {
+}: GetUserRepositoriesParams): Promise<PaginatedResult<UserRepositoriesData>> {
   const headers: HeadersInit = {
     Accept: 'application/vnd.github.v3+json'
   };
@@ -33,7 +32,11 @@ export async function getUserRepositories({
   }
 
   try {
-    const getUserReposUrl = `https://api.github.com/users/${username}/repos?page=${page}&per_page=${perPage}`;
+    const getUserReposUrl = applyPaginationParams({
+      url: `https://api.github.com/users/${username}/repos`,
+      page,
+      perPage
+    })
 
     const response = await fetch(getUserReposUrl, {
       method: 'GET',
