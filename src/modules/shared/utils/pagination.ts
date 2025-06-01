@@ -98,3 +98,15 @@ export function getPaginationStatus({ apiPageNum, linkHeader }: GetPaginationSta
     lastPage: lastPageNum
   };
 }
+export interface ApplyPaginationParams {
+  url: string;
+  page: number;
+  perPage: number;
+}
+
+export function applyPaginationParams({ url, page, perPage }: ApplyPaginationParams): string {
+  const urlObj = new URL(url);
+  urlObj.searchParams.set('page', String(page));
+  urlObj.searchParams.set('per_page', String(perPage));
+  return urlObj.toString();
+}
