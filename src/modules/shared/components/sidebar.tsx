@@ -1,8 +1,11 @@
 import { InstallAppButton } from '@/modules/offline/components/install-app-button';
 import { ROUTES } from '@/modules/shared/routes';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from './ui/button';
+
+import { DiscIcon } from '@/assets/disc-icon';
+import { PlayIcon } from '@/assets/play-icon';
+import { UserIcon } from '@/assets/user-icon';
 
 export function Sidebar() {
   return (
@@ -10,42 +13,30 @@ export function Sidebar() {
       <nav>
         <ul className="space-y-12">
           <li>
-            <Button variant="link" asChild>
+            <Button variant="link" asChild className='[&>svg]:size-6'>
               <Link href={ROUTES.repositories}>
-                <Image
-                  src="/disc.svg"
-                  alt="Ícone de repositórios"
-                  height={24}
-                  width={24}
-                  priority
+                <DiscIcon
+                  // alt="Ícone de repositórios"
                 />
                 Repositórios
               </Link>
             </Button>
           </li>
           <li>
-            <Button variant="link" asChild>
+            <Button variant="link" asChild className='[&>svg]:size-6'>
               <Link href={ROUTES.followingUsers}>
-                <Image
-                  src="/play.svg"
-                  alt="Ícone de perfis seguidos"
-                  height={24}
-                  width={24}
-                  priority
+                <PlayIcon
+                  // alt="Ícone de perfis seguidos"
                 />
                 Seguindo
               </Link>
             </Button>
           </li>
           <li>
-            <Button variant="link" asChild>
+            <Button variant="link" asChild className='[&>svg]:size-6'>
               <Link href={ROUTES.profile}>
-                <Image
-                  src="/user.svg"
-                  alt="Ícone de perfil do usuário"
-                  height={24}
-                  width={24}
-                  priority
+                <UserIcon
+                  // alt="Ícone de perfil do usuário"
                 />
                 Perfil
               </Link>

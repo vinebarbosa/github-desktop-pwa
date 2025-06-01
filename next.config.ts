@@ -1,31 +1,48 @@
+
 import type { NextConfig } from 'next';
-import withPWA from 'next-pwa';
+import {
+  PHASE_DEVELOPMENT_SERVER,
+  PHASE_PRODUCTION_BUILD,
+} from 'next/constants';
 
-const baseConfig: NextConfig = {
-  webpack: (config) => {
-    config.module.rules.push({
-      test: /\.svg$/i,
-      issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack']
-    });
+const nextConfig: NextConfig = {
+    webpack: (config) => {
+      config.module.rules.push({
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack']
+      });
 
-    return config;
-  },
-  turbopack: {
-    rules: {
-      '*.svg': {
-        loaders: ['@svgr/webpack'],
-        as: '*.js'
+      return config;
+    },
+    turbopack: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js'
+        }
       }
     }
   }
+
+const config = async (
+  phase: string
+): Promise<NextConfig> => {
+  if (
+    phase === PHASE_DEVELOPMENT_SERVER ||
+    phase === PHASE_PRODUCTION_BUILD
+  ) {
+    const withSerwist = (await import('@serwist/next')).default({
+      swSrc: 'src/app-worker.ts',
+      swDest: 'public/sw.js',
+      reloadOnOnline: true,
+    });
+
+    return withSerwist(nextConfig);
+  }
+
+  return nextConfig;
 };
 
-const withPWAFunc = withPWA({
-  dest: 'public',
-  register: true,
-  skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development'
-});
+export default config;
 
-export default withPWAFunc(baseConfig as any);
