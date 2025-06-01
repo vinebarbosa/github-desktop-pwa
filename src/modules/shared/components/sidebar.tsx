@@ -1,3 +1,4 @@
+import { InstallAppButton } from '@/modules/offline/components/install-app-button';
 import { ROUTES } from '@/modules/shared/routes';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -53,9 +54,7 @@ export function Sidebar() {
         </ul>
       </nav>
 
-      <Button variant="link" className="mt-auto">
-        Instalar PWA
-      </Button>
+      <InstallAppButton />
     </aside>
   );
 }
