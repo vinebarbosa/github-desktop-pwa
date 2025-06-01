@@ -3,15 +3,14 @@ const FIRST_PAGE = 1
 export function getApiPageNumber(param: any): number {
   const num = Number(param);
 
-  if (typeof param === 'string') {
-    if (!Number.isNaN(num) && num <= FIRST_PAGE) {
-      return FIRST_PAGE
-    }
-  }
-
   if (Number.isNaN(num)) {
     return FIRST_PAGE
   }
+
+  if (num <= FIRST_PAGE) {
+    return FIRST_PAGE
+  }
+
   return num
 }
 
