@@ -5,23 +5,31 @@ import { Header } from '@/modules/shared/components/header';
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar';
 
 import { auth } from '@/modules/auth';
-import { getUserRepositories } from '@/modules/repos/http/get-user-repositories';
+import {
+  type GetUserRepositoriesParams,
+  getUserRepositories
+} from '@/modules/repos/http/get-user-repositories';
+import { PagePagination } from '@/modules/shared/components/page-pagination';
 import { getUser } from '@/modules/shared/http/get-user';
-interface FollowingRepositoriesPageProps {
+import type { DefaultPageProps } from '@/modules/shared/types/default-page-props';
+import { getApiPageNumber } from '@/modules/shared/utils/pagination';
+interface FollowingRepositoriesPageProps extends DefaultPageProps {
   params: Promise<{ username: string }>;
 }
 
 export default async function FollowingRepositoriesPage({
-  params
+  params: pageParams,
+  searchParams: pageSearchParams
 }: FollowingRepositoriesPageProps) {
-  const session = await auth();
+  const [session, params, searchParams] = await Promise.all([auth(), pageParams, pageSearchParams]);
 
-  const requestParams = {
-    username: (await params).username,
-    authorizationToken: session?.accessToken
+  const requestParams: GetUserRepositoriesParams = {
+    username: params.username,
+    authorizationToken: session?.accessToken,
+    page: getApiPageNumber(searchParams.pagina)
   };
 
-  const [user, userRepositories] = await Promise.all([
+  const [user, [userRepositories, pagination]] = await Promise.all([
     getUser(requestParams),
     getUserRepositories(requestParams)
   ]);
@@ -40,15 +48,20 @@ export default async function FollowingRepositoriesPage({
         </Avatar>
       </Header>
 
-      <RepositoriesList>
-        {userRepositories.map((repository) => (
-          <RepositoriesListItem
-            key={repository.id}
-            description={repository.description}
-            name={repository.name}
-          />
-        ))}
-      </RepositoriesList>
+      <main>
+        <RepositoriesList>
+          {userRepositories.map((repository) => (
+            <RepositoriesListItem
+              key={repository.id}
+              description={repository.description}
+              name={repository.name}
+            />
+          ))}
+        </RepositoriesList>
+      </main>
+      <footer>
+        <PagePagination paginationStatus={pagination} />
+      </footer>
     </div>
   );
 }

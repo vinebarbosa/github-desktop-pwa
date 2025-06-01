@@ -5,18 +5,31 @@ import { RepositoriesListItem } from '@/modules/repos/components/repositories-li
 import { Header, HeaderDescription, HeaderTitle } from '@/modules/shared/components/header';
 
 import { CreateRepositoryDialog } from '@/modules/repos/components/create-repository-dialog';
-import { getUserRepositories } from '@/modules/repos/http/get-user-repositories';
+import {
+  type GetUserRepositoriesParams,
+  getUserRepositories
+} from '@/modules/repos/http/get-user-repositories';
+import { PagePagination } from '@/modules/shared/components/page-pagination';
+import { getApiPageNumber } from '@/modules/shared/utils/pagination';
 
+interface UserRepositoriesPageProps {
+  searchParams: Promise<{
+    pagina?: string;
+  }>;
+}
 
-export default async function UserRepositoriesPage() {
-  const session = await auth();
+export default async function UserRepositoriesPage(props: UserRepositoriesPageProps) {
+  const [session, searchParams] = await Promise.all([auth(), props.searchParams]);
 
-  const requestParams = {
+  const { pagina } = searchParams;
+
+  const requestParams: GetUserRepositoriesParams = {
     username: session?.user?.id as string,
-    authorizationToken: session?.accessToken
+    authorizationToken: session?.accessToken,
+    page: getApiPageNumber(pagina)
   };
 
-  const userRepositories = await getUserRepositories(requestParams);
+  const [userRepositories, pagination] = await getUserRepositories(requestParams);
 
   return (
     <div className="flex flex-col flex-1 space-y-4">
@@ -37,6 +50,8 @@ export default async function UserRepositoriesPage() {
           />
         ))}
       </RepositoriesList>
+
+      <PagePagination paginationStatus={pagination}/>
     </div>
   );
 }
