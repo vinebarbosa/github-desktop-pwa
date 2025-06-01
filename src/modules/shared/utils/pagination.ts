@@ -1,16 +1,18 @@
+const FIRST_PAGE = 1
+
 export function getApiPageNumber(param: any): number {
   const num = Number(param);
 
   if (typeof param === 'string') {
-    if (!Number.isNaN(num) && num <= 0) {
-      return 0;
+    if (!Number.isNaN(num) && num <= FIRST_PAGE) {
+      return FIRST_PAGE
     }
   }
 
   if (Number.isNaN(num)) {
-    return 0;
+    return FIRST_PAGE
   }
-  return num - 1;
+  return num
 }
 
 function parseLinkHeader(linkHeader: string | null): { [key: string]: string } {
@@ -49,24 +51,21 @@ export interface PaginationStatus {
   page: number;
   hasNext: boolean;
   hasPrev: boolean;
-  apiPageNumber: number;
   firstPage: number;
   lastPage: number;
 }
 
 export interface GetPaginationStatusParams {
-  apiPageNum: number;
+  currentPage: number;
   linkHeader: string | null;
 }
 
-export function getPaginationStatus({ apiPageNum, linkHeader }: GetPaginationStatusParams): PaginationStatus {
-  const uiPageNum = apiPageNum + 1;
+export function getPaginationStatus({ currentPage, linkHeader }: GetPaginationStatusParams): PaginationStatus {
 
-  const isFirst = uiPageNum === 1;
+  const isFirst = currentPage === 1;
 
   let isLast = false;
-  const firstPageNum = 1;
-  let lastPageNum = uiPageNum;
+  let lastPageNum = currentPage;
 
   const parsedLinks = parseLinkHeader(linkHeader);
 
@@ -90,11 +89,10 @@ export function getPaginationStatus({ apiPageNum, linkHeader }: GetPaginationSta
   return {
     isFirstPage: isFirst,
     isLastPage: isLast,
-    page: uiPageNum,
+    page: currentPage,
     hasNext: hasNext,
     hasPrev: hasPrev,
-    apiPageNumber: apiPageNum,
-    firstPage: firstPageNum,
+    firstPage: FIRST_PAGE,
     lastPage: lastPageNum
   };
 }

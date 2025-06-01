@@ -61,7 +61,7 @@ export async function getFollowingUsers({
     const linkHeader = response.headers.get('Link');
 
     const paginationStatus = getPaginationStatus({
-      apiPageNum: page,
+      currentPage: page,
       linkHeader
     });
 

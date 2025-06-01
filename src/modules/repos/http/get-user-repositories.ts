@@ -62,7 +62,7 @@ export async function getUserRepositories({
     const linkHeader = response.headers.get('Link');
 
     const paginationStatus = getPaginationStatus({
-      apiPageNum: page,
+      currentPage: page,
       linkHeader
     });
 
