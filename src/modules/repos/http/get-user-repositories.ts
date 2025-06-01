@@ -1,6 +1,10 @@
+import { type PaginationStatus, getPaginationStatus } from '@/modules/shared/utils/pagination';
+
 export interface GetUserRepositoriesParams {
   username: string;
   authorizationToken?: string;
+  page: number;
+  perPage?: number;
 }
 
 export interface UserRepositoriesData {
@@ -12,13 +16,16 @@ export interface UserRepositoriesData {
   };
 }
 
+export type PaginatedRepositoriesResult = [UserRepositoriesData[], PaginationStatus];
+
 export async function getUserRepositories({
   username,
-  authorizationToken
-}: GetUserRepositoriesParams): Promise<UserRepositoriesData[]> {
+  authorizationToken,
+  page,
+  perPage = 10
+}: GetUserRepositoriesParams): Promise<PaginatedRepositoriesResult> {
   const headers: HeadersInit = {
-    Accept: 'application/vnd.github.v3+json',
-    'User-Agent': 'GitHubViewerApp'
+    Accept: 'application/vnd.github.v3+json'
   };
 
   if (authorizationToken) {
@@ -26,7 +33,9 @@ export async function getUserRepositories({
   }
 
   try {
-    const response = await fetch(`https://api.github.com/users/${username}/repos`, {
+    const getUserReposUrl = `https://api.github.com/users/${username}/repos?page=${page}&per_page=${perPage}`;
+
+    const response = await fetch(getUserReposUrl, {
       method: 'GET',
       headers: headers,
       next: {
@@ -47,8 +56,15 @@ export async function getUserRepositories({
       );
     }
 
+    const linkHeader = response.headers.get('Link');
+
+    const paginationStatus = getPaginationStatus({
+      apiPageNum: page,
+      linkHeader
+    });
+
     const data: UserRepositoriesData[] = await response.json();
-    return data;
+    return [data, paginationStatus];
   } catch (error) {
     console.error('Erro na função getUserRepositories:', error);
     throw error;
