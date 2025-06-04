@@ -1,10 +1,12 @@
-name: Build
+name: SonarCube
+
 on:
   push:
     branches:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
   sonarqube:
     name: SonarQube
@@ -32,7 +34,7 @@ jobs:
         run: pnpm install
 
       - name: Run tests with coverage (Vitest)
-        run: pnpm run test
+        run: pnpm run test:coverage
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
