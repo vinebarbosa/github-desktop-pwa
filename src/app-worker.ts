@@ -1,7 +1,5 @@
-
 import { defaultCache } from "@serwist/next/worker";
 import type { PrecacheEntry, SerwistGlobalConfig } from "serwist";
-
 import {
   ExpirationPlugin,
   NetworkFirst,
@@ -49,32 +47,45 @@ const serwist = new Serwist({
           }),
         ],
       }),
-    }
+    },
   ],
-  fallbacks: {
-    entries: [
-      {
-        url: '/offline',
-        matcher({ request }) {
-          return request.destination === 'document';
-        },
-      },
-    ],
-  },
 });
 
 serwist.addEventListeners();
 
-const urlsToPrecache = [ROUTES.followingUsers, ROUTES.profile, ROUTES.repositories] as const;
+const urlsToPrecache = [
+  ROUTES.followingUsers,
+  ROUTES.profile,
+  ROUTES.repositories,
+  "/offline",
+] as const;
 
 self.addEventListener("install", (event) => {
-  const requestPromises = Promise.all(
-    urlsToPrecache.map((entry) => {
-      return serwist.handleRequest({ request: new Request(entry), event });
-    }),
+  event.waitUntil(
+    caches.open("static-cache").then((cache) =>
+      cache.addAll(urlsToPrecache as any)
+    )
   );
-
-  event.waitUntil(requestPromises);
 });
 
-serwist.addEventListeners();
+self.addEventListener("fetch", (event) => {
+  const { request } = event;
+
+  if (request.mode === "navigate") {
+    console.log("passow aqui")
+    event.respondWith(
+      fetch(request)
+        .then((response) => response)
+        .catch(() =>
+          caches.match("/offline").then((cachedResponse) => {
+            if (cachedResponse) return cachedResponse;
+
+            return new Response("Offline fallback not available.", {
+              status: 503,
+              headers: { "Content-Type": "text/plain" },
+            });
+          })
+        )
+    );
+  }
+});

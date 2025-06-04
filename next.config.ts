@@ -36,6 +36,7 @@ const config = async (
       swSrc: 'src/app-worker.ts',
       swDest: 'public/sw.js',
       reloadOnOnline: true,
+      disable: process.env.NODE_ENV !== "production"
     });
 
     return withSerwist(nextConfig);
