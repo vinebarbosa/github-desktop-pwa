@@ -33,7 +33,7 @@ export default async function UserRepositoriesPage(props: UserRepositoriesPagePr
 
   return (
     <div className="flex flex-col flex-1 space-y-4">
-      <Header className="flex-row items-center space-y-0">
+      <Header className="flex-col md:flex-row md:items-center space-y-6 md:space-y-0">
         <div>
           <HeaderTitle>Meus repositórios</HeaderTitle>
           <HeaderDescription>Seus repositórios do Github</HeaderDescription>
