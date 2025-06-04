@@ -15,7 +15,8 @@ import { ROUTES } from '@/modules/shared/routes';
 import type { DefaultPageProps } from '@/modules/shared/types/default-page-props';
 import { getApiPageNumber } from '@/modules/shared/utils/pagination';
 import Link from 'next/link';
-import { ArrowLeftIcon } from '@/assets/arrow-left-icon';
+
+import { ArrowLeftIcon } from '@/modules/shared/icons/arrow-left';
 interface FollowingRepositoriesPageProps extends DefaultPageProps {
   params: Promise<{ username: string }>;
 }
@@ -42,7 +43,7 @@ export default async function FollowingRepositoriesPage({
   return (
     <div className="flex flex-col flex-1 space-y-4">
       <Header className="flex-row">
-        <Button asChild variant="link" className="text-primary">
+        <Button asChild variant="link" className="text-primary [&>svg]:size-8">
           <Link href={ROUTES.followingUsers}>
             <ArrowLeftIcon />
             <h1 className="text-base">{user.name}</h1>

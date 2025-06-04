@@ -1,31 +1,14 @@
 
+import { withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
 import {
   PHASE_DEVELOPMENT_SERVER,
   PHASE_PRODUCTION_BUILD,
 } from 'next/constants';
 
-const nextConfig: NextConfig = {
-    webpack: (config) => {
-      config.module.rules.push({
-        test: /\.svg$/i,
-        issuer: /\.[jt]sx?$/,
-        use: ['@svgr/webpack']
-      });
+const nextConfig: NextConfig = {};
 
-      return config;
-    },
-    turbopack: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js'
-        }
-      }
-    }
-  }
-
-const config = async (
+const swConfig = async (
   phase: string
 ): Promise<NextConfig> => {
   if (
@@ -45,5 +28,13 @@ const config = async (
   return nextConfig;
 };
 
-export default config;
 
+export default withSentryConfig(swConfig, {
+  org: "luizalabs-mu",
+  project: "luizahub",
+  silent: !process.env.CI,
+  widenClientFileUpload: true,
+  tunnelRoute: "/monitoring",
+  disableLogger: true,
+  automaticVercelMonitors: true,
+});

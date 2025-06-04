@@ -42,6 +42,9 @@ next-env.d.ts
 
 desafio-luizalabs-github.md
 
+# Sentry Config File
+.env.sentry-build-plugin
+
 certificates
 
 public/sw.js
