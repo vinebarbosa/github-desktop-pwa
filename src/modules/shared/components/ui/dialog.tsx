@@ -2,7 +2,7 @@
 
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 
-import XIcon from '@/assets/x.svg';
+import { XIcon } from '../../icons/x';
 
 import { mergeClasses } from '@/modules/shared/utils/tailwind';
 
