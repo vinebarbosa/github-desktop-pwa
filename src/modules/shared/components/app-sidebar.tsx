@@ -7,14 +7,14 @@ import {
   SidebarMenu,
   SidebarMenuItem,
 } from "@/modules/shared/components/ui/sidebar";
-import { Button } from "./ui/button";
-import Link from "next/link";
 import { ROUTES } from '@/modules/shared/routes';
+import Link from "next/link";
+import { Button } from "./ui/button";
 
+import { InstallAppButton } from "@/modules/offline/components/install-app-button";
 import { DiscIcon } from "../icons/disc";
 import { PlayIcon } from "../icons/play";
 import { UserIcon } from "../icons/user";
-import { ArrowDownCircleIcon } from "../icons/arrow-down-circle";
 
 const navigationItems = [
   {
@@ -56,10 +56,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <Button variant="link" className="text-white [&>svg]:size-6 -tracking-[5.25%] h-fit">
-          <ArrowDownCircleIcon/>
-          Instalar PWA
-        </Button>
+        <InstallAppButton />
       </SidebarFooter>
     </Sidebar>
   );
