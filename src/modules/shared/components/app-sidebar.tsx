@@ -11,7 +11,7 @@ import { ROUTES } from '@/modules/shared/routes';
 import Link from 'next/link';
 import { Button } from './ui/button';
 
-import { InstallAppButton } from '@/modules/offline/components/install-app-button';
+import { InstallAppButton } from '@/modules/pwa/components/install-app-button';
 import { DiscIcon } from '../icons/disc';
 import { PlayIcon } from '../icons/play';
 import { UserIcon } from '../icons/user';

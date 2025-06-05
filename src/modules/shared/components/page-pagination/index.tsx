@@ -1,33 +1,21 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
-import type { PaginationStatus } from '../utils/pagination';
+import type { PaginationStatus } from '../../utils/pagination';
 import {
   Pagination,
   PaginationContent,
   PaginationItem,
   PaginationNext,
   PaginationPrevious
-} from './ui/pagination';
+} from '../ui/pagination';
+import { usePagePagination } from './use-page-pagination';
 
 interface PagePaginationProps {
   paginationStatus: PaginationStatus;
 }
 
 export function PagePagination({ paginationStatus }: PagePaginationProps) {
-  const searchParams = useSearchParams();
-
-  const createPageHref = (pageNumber: number): string => {
-    const newSearchParams = new URLSearchParams(searchParams.toString());
-    if (pageNumber === 1) {
-      newSearchParams.delete('pagina');
-    } else {
-      newSearchParams.set('pagina', pageNumber.toString());
-    }
-    return `?${newSearchParams.toString()}`;
-  };
-
-  const { page, hasNext, hasPrev } = paginationStatus;
+  const { createPageHref, hasNext, hasPrev, page } = usePagePagination(paginationStatus)
 
   return (
     <Pagination className="mx-auto">

@@ -1,4 +1,4 @@
-import type { UserRepositoriesData } from '@/modules/repos/http/get-user-repositories';
+import type { UserRepositoriesData } from '@/modules/repos/http/dto/user-repositories-data';
 import type { PaginatedResult } from '@/modules/shared/types/paginated-result';
 import { getPaginationStatus } from '@/modules/shared/utils/pagination';
 
