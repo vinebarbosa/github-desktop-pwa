@@ -1,0 +1,8 @@
+onlyBuiltDependencies:
+  - '@biomejs/biome'
+  - '@sentry/cli'
+  - '@tailwindcss/oxide'
+  - cypress
+  - esbuild
+  - sharp
+  - sonar-scanner

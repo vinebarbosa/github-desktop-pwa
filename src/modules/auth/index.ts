@@ -1,9 +1,10 @@
 import NextAuth from "next-auth"
 import { ROUTES } from "../../modules/shared/routes";
-import GitHub from "./github-provider";
+
+import { providersFactory } from "./utils/providers-factory";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  providers: [GitHub],
+  providers: providersFactory(),
   pages: {
     signIn: ROUTES.signIn
   },
@@ -24,7 +25,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
 
       if (token.userId) {
-        session.user.id = token.userId;
+        session.user = {
+          ...session.user,
+          id: token.userId,
+        };
       }
 
       return session;

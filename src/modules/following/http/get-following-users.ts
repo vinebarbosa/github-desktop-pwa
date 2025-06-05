@@ -33,7 +33,6 @@ export async function getFollowingUsers({
     perPage
   })
 
-
   try {
     const response = await fetch(url, {
       method: 'GET',

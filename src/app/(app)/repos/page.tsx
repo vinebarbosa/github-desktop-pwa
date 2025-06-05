@@ -5,11 +5,9 @@ import { RepositoriesListItem } from '@/modules/repos/components/repositories-li
 import { Header, HeaderDescription, HeaderTitle } from '@/modules/shared/components/header';
 
 import { CreateRepositoryDialog } from '@/modules/repos/components/create-repository-dialog';
-import {
-  type GetUserRepositoriesParams,
-  getUserRepositories
-} from '@/modules/repos/http/get-user-repositories';
+import type { GetUserRepositoriesParams } from '@/modules/repos/http/get-user-repositories';
 import { PagePagination } from '@/modules/shared/components/page-pagination';
+import { luizaHubServiceFactory } from '@/modules/shared/utils/luizahub-service-factory';
 import { getApiPageNumber } from '@/modules/shared/utils/pagination';
 
 interface UserRepositoriesPageProps {
@@ -23,13 +21,15 @@ export default async function UserRepositoriesPage(props: UserRepositoriesPagePr
 
   const { pagina } = searchParams;
 
+  const service = luizaHubServiceFactory();
+
   const requestParams: GetUserRepositoriesParams = {
     username: session?.user?.id as string,
     authorizationToken: session?.accessToken,
     page: getApiPageNumber(pagina)
   };
 
-  const [userRepositories, pagination] = await getUserRepositories(requestParams);
+  const [userRepositories, pagination] = await service.getRepos(requestParams);
 
   return (
     <div className="flex flex-col flex-1 space-y-4">
@@ -51,7 +51,7 @@ export default async function UserRepositoriesPage(props: UserRepositoriesPagePr
         ))}
       </RepositoriesList>
 
-      <PagePagination paginationStatus={pagination}/>
+      <PagePagination paginationStatus={pagination} />
     </div>
   );
 }

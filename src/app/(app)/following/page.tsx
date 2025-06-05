@@ -1,14 +1,11 @@
 import { auth } from '@/modules/auth';
-import {
-  type GetFollowingUsersParams,
-  getFollowingUsers
-} from '@/modules/following/http/get-following-users';
+import type { GetFollowingUsersParams } from '@/modules/following/http/get-following-users';
 import { Header, HeaderDescription, HeaderTitle } from '@/modules/shared/components/header';
-import { getUser } from '@/modules/shared/http/get-user';
 
 import { FollowedUserCard } from '@/modules/following/components/followed-user-card';
 import { PagePagination } from '@/modules/shared/components/page-pagination';
 import type { DefaultPageProps } from '@/modules/shared/types/default-page-props';
+import { luizaHubServiceFactory } from '@/modules/shared/utils/luizahub-service-factory';
 import { getApiPageNumber } from '@/modules/shared/utils/pagination';
 
 export default async function FollowingUsersPage(props: DefaultPageProps) {
@@ -16,13 +13,15 @@ export default async function FollowingUsersPage(props: DefaultPageProps) {
 
   const authorizationToken = session?.accessToken;
 
+  const service = luizaHubServiceFactory();
+
   const requestParams: GetFollowingUsersParams = {
     username: session?.user?.id as string,
     authorizationToken,
     page: getApiPageNumber(searchParams.pagina)
   };
 
-  const [followingUsers, pagination] = await getFollowingUsers(requestParams);
+  const [followingUsers, pagination] = await service.getFollowing(requestParams);
 
   return (
     <div className="flex flex-col flex-1 space-y-4">
@@ -36,7 +35,7 @@ export default async function FollowingUsersPage(props: DefaultPageProps) {
           {followingUsers.map(({ login: username }) => (
             <FollowedUserCard
               key={username}
-              getUser={() => getUser({ username, authorizationToken })}
+              getUser={() => service.getUser({ username, authorizationToken })}
             />
           ))}
         </ul>
