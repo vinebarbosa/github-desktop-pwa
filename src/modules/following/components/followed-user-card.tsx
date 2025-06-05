@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar';
-import type { UserResponseData } from '@/modules/shared/http/dto/get-user-response-data';
 import { ROUTES } from '@/modules/shared/routes';
+import type { UserResponseData } from '@/modules/user/http/dto/get-user-response-data';
 import Link from 'next/link';
 
 type FollowedUserCardProps = {

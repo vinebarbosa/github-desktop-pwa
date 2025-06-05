@@ -1,21 +1,7 @@
 import type { PaginatedResult } from '@/modules/shared/types/paginated-result';
 import { applyPaginationParams, getPaginationStatus } from '@/modules/shared/utils/pagination';
-
-export interface GetUserRepositoriesParams {
-  username: string;
-  authorizationToken?: string;
-  page: number;
-  perPage?: number;
-}
-
-export interface UserRepositoriesData {
-  id: number;
-  name: string;
-  description: string | null;
-  owner: {
-    login: string;
-  };
-}
+import type { GetUserRepositoriesParams } from './dto/get-user-repositories-params';
+import type { UserRepositoriesData } from './dto/user-repositories-data';
 
 export async function getUserRepositories({
   username,

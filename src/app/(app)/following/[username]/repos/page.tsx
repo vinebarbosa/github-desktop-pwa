@@ -4,7 +4,7 @@ import { Header } from '@/modules/shared/components/header';
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar';
 
 import { auth } from '@/modules/auth';
-import type { GetUserRepositoriesParams } from '@/modules/repos/http/get-user-repositories';
+import type { GetUserRepositoriesParams } from '@/modules/repos/http/dto/get-user-repositories-params';
 import { PagePagination } from '@/modules/shared/components/page-pagination';
 import { Button } from '@/modules/shared/components/ui/button';
 import { ROUTES } from '@/modules/shared/routes';

@@ -1,10 +1,6 @@
-'use client';
+import { useEffect, useRef, useState } from 'react';
 
-import { Button } from '@/modules/shared/components/ui/button';
-import { ArrowDownCircleIcon } from '@/modules/shared/icons/arrow-down-circle';
-import React, { useEffect, useState, useRef } from 'react';
-
-interface BeforeInstallPromptEvent extends Event {
+export interface BeforeInstallPromptEvent extends Event {
   readonly platforms: Array<string>;
   readonly userChoice: Promise<{
     outcome: 'accepted' | 'dismissed';
@@ -13,7 +9,7 @@ interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
 }
 
-export function InstallAppButton() {
+export function useInstallAppButton() {
   const [showInstallButton, setShowInstallButton] = useState(false);
   const deferredPrompt = useRef<BeforeInstallPromptEvent | null>(null);
 
@@ -63,18 +59,9 @@ export function InstallAppButton() {
     }
   };
 
-  if (!showInstallButton) {
-    return null;
-  }
 
-  return (
-    <Button
-      onClick={handleInstallClick}
-      variant="link"
-      className="text-white [&>svg]:size-6 -tracking-[5.25%] h-fit"
-    >
-      <ArrowDownCircleIcon />
-      Instalar PWA
-    </Button>
-  );
+  return {
+    handleInstallClick,
+    showInstallButton
+  }
 }

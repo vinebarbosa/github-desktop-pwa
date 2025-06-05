@@ -5,7 +5,7 @@ import { RepositoriesListItem } from '@/modules/repos/components/repositories-li
 import { Header, HeaderDescription, HeaderTitle } from '@/modules/shared/components/header';
 
 import { CreateRepositoryDialog } from '@/modules/repos/components/create-repository-dialog';
-import type { GetUserRepositoriesParams } from '@/modules/repos/http/get-user-repositories';
+import type { GetUserRepositoriesParams } from '@/modules/repos/http/dto/get-user-repositories-params';
 import { PagePagination } from '@/modules/shared/components/page-pagination';
 import { luizaHubServiceFactory } from '@/modules/shared/factories/luizahub-service-factory';
 import { getApiPageNumber } from '@/modules/shared/utils/pagination';
