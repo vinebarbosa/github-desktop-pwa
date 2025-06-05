@@ -13,6 +13,7 @@ jobs:
   vitest:
     name: Run Vitest
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
     strategy:
       matrix:
         node-version: [20]
@@ -39,6 +40,7 @@ jobs:
   cypress-run:
     name: Run Cypress E2E Tests
     runs-on: ubuntu-24.04
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
     needs: vitest
     strategy:
       matrix:
@@ -79,6 +81,7 @@ jobs:
   deploy-production:
     name: Vercel Production Deployment
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     needs: [vitest, cypress-run]
     strategy:
       matrix:
