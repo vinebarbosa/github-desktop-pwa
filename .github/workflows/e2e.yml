@@ -31,7 +31,7 @@ jobs:
         run: pnpm install
 
       - name: Install Cypress binary
-        run: pnp dlx cypress install
+        run: pnpm dlx cypress install
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
