@@ -41,3 +41,5 @@ jobs:
           wait-on: 'http://localhost:3000'
         env:
           TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          AUTH_TRUST_HOST: ${{ secrets.AUTH_TRUST_HOST }}
+          NEXT_PUBLIC_MODE: ${{ secrets.NEXT_PUBLIC_MODE }}
