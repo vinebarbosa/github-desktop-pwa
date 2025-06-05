@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/modules/shared/components/ui/button';
+import { ArrowDownCircleIcon } from '@/modules/shared/icons/arrow-down-circle';
 import React, { useEffect, useState, useRef } from 'react';
 
 interface BeforeInstallPromptEvent extends Event {
@@ -67,8 +68,10 @@ export function InstallAppButton() {
   }
 
   return (
-    <Button onClick={handleInstallClick} variant="link" className="mt-auto">
-      Instalar Aplicativo
+
+    <Button onClick={handleInstallClick} variant="link" className="text-white [&>svg]:size-6 -tracking-[5.25%] h-fit">
+      <ArrowDownCircleIcon />
+      Instalar PWA
     </Button>
   );
 }
