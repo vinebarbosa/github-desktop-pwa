@@ -1,17 +1,7 @@
 import type { PaginatedResult } from '@/modules/shared/types/paginated-result';
 import { applyPaginationParams, getPaginationStatus } from '@/modules/shared/utils/pagination';
-
-export interface GetFollowingUsersParams {
-  username: string;
-  authorizationToken?: string;
-  page: number;
-  perPage?: number;
-}
-
-export interface FollowingUserData {
-  login: string;
-  avatar_url: string;
-}
+import type { FollowingUserData } from './dto/following-user-data';
+import type { GetFollowingUsersParams } from './dto/get-following-users-params';
 
 export async function getFollowingUsers({
   username,
@@ -31,7 +21,7 @@ export async function getFollowingUsers({
     url: `https://api.github.com/users/${username}/following`,
     page,
     perPage
-  })
+  });
 
   try {
     const response = await fetch(url, {

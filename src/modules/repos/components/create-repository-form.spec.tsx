@@ -122,5 +122,5 @@ describe('CreateRepositoryForm', () => {
       expect(mockOnSubmitError).toHaveBeenCalledTimes(1);
       expect(mockOnSubmitError).toHaveBeenCalledWith(error);
     });
-  })
+  });
 });

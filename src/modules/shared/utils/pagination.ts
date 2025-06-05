@@ -1,17 +1,17 @@
-const FIRST_PAGE = 1
+const FIRST_PAGE = 1;
 
 export function getApiPageNumber(param: any): number {
   const num = Number(param);
 
   if (Number.isNaN(num)) {
-    return FIRST_PAGE
+    return FIRST_PAGE;
   }
 
   if (num <= FIRST_PAGE) {
-    return FIRST_PAGE
+    return FIRST_PAGE;
   }
 
-  return num
+  return num;
 }
 
 function parseLinkHeader(linkHeader: string | null): { [key: string]: string } {
@@ -59,8 +59,10 @@ export interface GetPaginationStatusParams {
   linkHeader: string | null;
 }
 
-export function getPaginationStatus({ currentPage, linkHeader }: GetPaginationStatusParams): PaginationStatus {
-
+export function getPaginationStatus({
+  currentPage,
+  linkHeader
+}: GetPaginationStatusParams): PaginationStatus {
   const isFirst = currentPage === 1;
 
   let isLast = false;

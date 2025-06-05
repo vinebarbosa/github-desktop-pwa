@@ -1,15 +1,15 @@
-import { USER_MOCK } from "@/mocks/user-mock";
-import Credentials from "next-auth/providers/credentials"
+import { USER_MOCK } from '@/mocks/user-mock';
+import Credentials from 'next-auth/providers/credentials';
 
 export const TestProvider = Credentials({
-  name: "Credentials",
+  name: 'Credentials',
   credentials: {
-    password: {},
+    password: {}
   },
   authorize: async (credentials) => {
     if (credentials.password === process.env.TEST_PASSWORD) {
       return USER_MOCK;
     }
     return null;
-  },
-})
+  }
+});

@@ -1,12 +1,12 @@
-import type { FollowingUserData } from '@/modules/following/http/get-following-users';
-import type { CreatedRepositoryData } from '@/modules/repos/http/create-repository';
+import type { FollowingUserData } from '@/modules/following/http/dto/following-user-data';
+import type { CreatedRepositoryData } from '@/modules/repos/http/dto/created-repository-data';
 import type { UserRepositoriesData } from '@/modules/repos/http/get-user-repositories';
-import type { UserData } from '../http/get-user';
+import type { UserResponseData } from '../http/dto/get-user-response-data';
 import type { PaginatedResult } from './paginated-result';
 
 export interface LuizaHubService {
   getRepos: (...params: any[]) => Promise<PaginatedResult<UserRepositoriesData>>;
-  getUser: (...params: any[]) => Promise<UserData>;
+  getUser: (...params: any[]) => Promise<UserResponseData>;
   createRepository: (...params: any[]) => Promise<CreatedRepositoryData>;
-  getFollowing: (...params: any[]) => Promise<PaginatedResult<FollowingUserData>>
+  getFollowing: (...params: any[]) => Promise<PaginatedResult<FollowingUserData>>;
 }

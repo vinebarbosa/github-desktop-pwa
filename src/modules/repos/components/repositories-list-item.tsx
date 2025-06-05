@@ -10,7 +10,7 @@ interface RepositoriesListItemProps {
 export function RepositoriesListItem({ name, description, className }: RepositoriesListItemProps) {
   return (
     <li data-testid="repo-item" className={mergeClasses('flex gap-4', className)}>
-      <div className='w-[4.5rem]'>
+      <div className="w-[4.5rem]">
         <div className="size-[4.5rem] bg-accent rounded flex items-center justify-center">
           <FolderIcon className="size-10 text-muted mb-0" />
         </div>

@@ -1,5 +1,5 @@
-import { AppSidebar } from "@/modules/shared/components/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/modules/shared/components/ui/sidebar";
+import { AppSidebar } from '@/modules/shared/components/app-sidebar';
+import { SidebarProvider, SidebarTrigger } from '@/modules/shared/components/ui/sidebar';
 import type { PropsWithChildren } from 'react';
 
 export default function RootLayout({ children }: PropsWithChildren) {

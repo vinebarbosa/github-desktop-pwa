@@ -68,8 +68,11 @@ export function InstallAppButton() {
   }
 
   return (
-
-    <Button onClick={handleInstallClick} variant="link" className="text-white [&>svg]:size-6 -tracking-[5.25%] h-fit">
+    <Button
+      onClick={handleInstallClick}
+      variant="link"
+      className="text-white [&>svg]:size-6 -tracking-[5.25%] h-fit"
+    >
       <ArrowDownCircleIcon />
       Instalar PWA
     </Button>

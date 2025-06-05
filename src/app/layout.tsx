@@ -8,9 +8,9 @@ import { Providers } from '@/modules/shared/components/providers';
 import { Toaster } from '@/modules/shared/components/ui/sonner';
 
 export const metadata: Metadata = {
-  title: 'Meu App',
-  manifest: "/manifest.json",
-  generator: "Next.js",
+  title: 'Luiza Hub',
+  manifest: '/manifest.json',
+  generator: 'Next.js'
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
