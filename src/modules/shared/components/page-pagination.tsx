@@ -27,21 +27,14 @@ export function PagePagination({ paginationStatus }: PagePaginationProps) {
     return `?${newSearchParams.toString()}`;
   };
 
-  const {
-    page,
-    isFirstPage,
-    isLastPage,
-    hasNext,
-    hasPrev,
-    firstPage,
-    lastPage
-  } = paginationStatus;
+  const { page, hasNext, hasPrev } = paginationStatus;
 
   return (
     <Pagination className="mx-auto">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
+            data-testid="pagination-prev"
             href={createPageHref(page - 1)}
             aria-disabled={!hasPrev}
             className={!hasPrev ? 'pointer-events-none opacity-50' : ''}
@@ -49,6 +42,7 @@ export function PagePagination({ paginationStatus }: PagePaginationProps) {
         </PaginationItem>
         <PaginationItem>
           <PaginationNext
+            data-testid="pagination-next"
             href={createPageHref(page + 1)}
             aria-disabled={!hasNext}
             className={!hasNext ? 'pointer-events-none opacity-50' : ''}

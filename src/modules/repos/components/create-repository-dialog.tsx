@@ -2,10 +2,10 @@
 
 import { Button } from '@/modules/shared/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/modules/shared/components/ui/dialog';
+import { luizaHubServiceFactory } from '@/modules/shared/utils/luizahub-service-factory';
 import { useSession } from 'next-auth/react';
 import { useCallback } from 'react';
 import { toast } from 'sonner';
-import { createRepository } from '../http/create-repository';
 import { revalidateUserRepositoriesAction } from '../server-actions/revalidate-user-repositories-action';
 import { CreateRepositoryForm } from './create-repository-form';
 import { CreateRepositorySuccessFeedback } from './create-repository-success-feedback';
@@ -13,18 +13,20 @@ import { CreateRepositorySuccessFeedback } from './create-repository-success-fee
 export function CreateRepositoryDialog() {
   const { data: session } = useSession();
 
+  const service = luizaHubServiceFactory()
+
   const handleCreateRepository = useCallback(
     async (data: { name: string }) => {
-      await createRepository({
+      await service.createRepository({
         name: data.name,
         authorizationToken: session?.accessToken
       });
     },
-    [session?.accessToken]
+    [session?.accessToken, service]
   );
 
   function handleCreateRepositoryError(error: Error) {
-    toast.error(error.message);
+    toast.error(error.message, { duration: 5000 });
   }
 
   return (

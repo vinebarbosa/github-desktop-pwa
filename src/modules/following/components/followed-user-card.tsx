@@ -11,7 +11,7 @@ export async function FollowedUserCard({ getUser }: FollowedUserCardProps) {
   const user = await getUser();
 
   return (
-    <li>
+    <li data-testid="following-item">
       <Link href={ROUTES.followingRepositories(user.login)} className="flex items-center gap-4">
         <Avatar>
           <AvatarImage src={user.avatar_url} />

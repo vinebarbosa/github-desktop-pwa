@@ -4,19 +4,16 @@ import { Header } from '@/modules/shared/components/header';
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar';
 
 import { auth } from '@/modules/auth';
-import {
-  type GetUserRepositoriesParams,
-  getUserRepositories
-} from '@/modules/repos/http/get-user-repositories';
+import type { GetUserRepositoriesParams } from '@/modules/repos/http/get-user-repositories';
 import { PagePagination } from '@/modules/shared/components/page-pagination';
 import { Button } from '@/modules/shared/components/ui/button';
-import { getUser } from '@/modules/shared/http/get-user';
 import { ROUTES } from '@/modules/shared/routes';
 import type { DefaultPageProps } from '@/modules/shared/types/default-page-props';
 import { getApiPageNumber } from '@/modules/shared/utils/pagination';
 import Link from 'next/link';
 
 import { ArrowLeftIcon } from '@/modules/shared/icons/arrow-left';
+import { luizaHubServiceFactory } from '@/modules/shared/utils/luizahub-service-factory';
 interface FollowingRepositoriesPageProps extends DefaultPageProps {
   params: Promise<{ username: string }>;
 }
@@ -27,6 +24,8 @@ export default async function FollowingRepositoriesPage({
 }: FollowingRepositoriesPageProps) {
   const [session, params, searchParams] = await Promise.all([auth(), pageParams, pageSearchParams]);
 
+  const service = luizaHubServiceFactory();
+
   const requestParams: GetUserRepositoriesParams = {
     username: params.username,
     authorizationToken: session?.accessToken,
@@ -34,8 +33,8 @@ export default async function FollowingRepositoriesPage({
   };
 
   const [user, [userRepositories, pagination]] = await Promise.all([
-    getUser(requestParams),
-    getUserRepositories(requestParams)
+    service.getUser(requestParams),
+    service.getRepos(requestParams)
   ]);
 
   const avatarFallback = user.name?.charAt(0).toUpperCase();

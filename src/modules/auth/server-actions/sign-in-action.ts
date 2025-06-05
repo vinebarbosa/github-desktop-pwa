@@ -1,8 +1,7 @@
-'use server';
+'use server'
 
-import { ROUTES } from "@/modules/shared/routes";
-import { signIn } from "..";
+import { signInFactory } from '../utils/sign-in-factory'
 
-export async function signInAction() {
-  await signIn('github', { redirect: true, redirectTo: ROUTES.repositories });
+export async function signInAction(formData: FormData) {
+  return await signInFactory(formData)
 }
