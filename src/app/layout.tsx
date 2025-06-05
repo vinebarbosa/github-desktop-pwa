@@ -8,7 +8,7 @@ import { Providers } from '@/modules/shared/components/providers';
 import { Toaster } from '@/modules/shared/components/ui/sonner';
 
 export const metadata: Metadata = {
-  title: 'Meu App',
+  title: 'Luiza Hub',
   manifest: '/manifest.json',
   generator: 'Next.js'
 };
