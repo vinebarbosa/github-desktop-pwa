@@ -5,33 +5,33 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
-  SidebarMenuItem,
-} from "@/modules/shared/components/ui/sidebar";
+  SidebarMenuItem
+} from '@/modules/shared/components/ui/sidebar';
 import { ROUTES } from '@/modules/shared/routes';
-import Link from "next/link";
-import { Button } from "./ui/button";
+import Link from 'next/link';
+import { Button } from './ui/button';
 
-import { InstallAppButton } from "@/modules/offline/components/install-app-button";
-import { DiscIcon } from "../icons/disc";
-import { PlayIcon } from "../icons/play";
-import { UserIcon } from "../icons/user";
+import { InstallAppButton } from '@/modules/offline/components/install-app-button';
+import { DiscIcon } from '../icons/disc';
+import { PlayIcon } from '../icons/play';
+import { UserIcon } from '../icons/user';
 
 const navigationItems = [
   {
-    title: "Repositórios",
+    title: 'Repositórios',
     href: ROUTES.repositories,
-    icon: DiscIcon,
+    icon: DiscIcon
   },
   {
-    title: "Seguindo",
+    title: 'Seguindo',
     href: ROUTES.followingUsers,
-    icon: PlayIcon,
+    icon: PlayIcon
   },
   {
-    title: "Perfil",
+    title: 'Perfil',
     href: ROUTES.profile,
-    icon: UserIcon,
-  },
+    icon: UserIcon
+  }
 ];
 
 export function AppSidebar() {

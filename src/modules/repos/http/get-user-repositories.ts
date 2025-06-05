@@ -36,7 +36,7 @@ export async function getUserRepositories({
       url: `https://api.github.com/users/${username}/repos`,
       page,
       perPage
-    })
+    });
 
     const response = await fetch(getUserReposUrl, {
       method: 'GET',

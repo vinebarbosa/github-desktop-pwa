@@ -1,7 +1,7 @@
 import { followingMock } from '@/mocks/following-mock';
 import { repositoriesMock } from '@/mocks/repositories-mock';
-import type { GetFollowingUsersParams } from '@/modules/following/http/get-following-users';
-import type { CreateRepositoryParams } from '@/modules/repos/http/create-repository';
+import type { GetFollowingUsersParams } from '@/modules/following/http/dto/get-following-users-params';
+import type { CreateRepositoryParams } from '@/modules/repos/http/dto/create-repository-params';
 import type { GetUserRepositoriesParams } from '@/modules/repos/http/get-user-repositories';
 import type { LuizaHubService } from '@/modules/shared/types/luiza-hub';
 

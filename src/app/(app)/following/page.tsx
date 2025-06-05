@@ -1,11 +1,11 @@
 import { auth } from '@/modules/auth';
-import type { GetFollowingUsersParams } from '@/modules/following/http/get-following-users';
+import type { GetFollowingUsersParams } from '@/modules/following/http/dto/get-following-users-params';
 import { Header, HeaderDescription, HeaderTitle } from '@/modules/shared/components/header';
 
 import { FollowedUserCard } from '@/modules/following/components/followed-user-card';
 import { PagePagination } from '@/modules/shared/components/page-pagination';
+import { luizaHubServiceFactory } from '@/modules/shared/factories/luizahub-service-factory';
 import type { DefaultPageProps } from '@/modules/shared/types/default-page-props';
-import { luizaHubServiceFactory } from '@/modules/shared/utils/luizahub-service-factory';
 import { getApiPageNumber } from '@/modules/shared/utils/pagination';
 
 export default async function FollowingUsersPage(props: DefaultPageProps) {

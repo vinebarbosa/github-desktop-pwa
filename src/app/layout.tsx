@@ -9,8 +9,8 @@ import { Toaster } from '@/modules/shared/components/ui/sonner';
 
 export const metadata: Metadata = {
   title: 'Meu App',
-  manifest: "/manifest.json",
-  generator: "Next.js",
+  manifest: '/manifest.json',
+  generator: 'Next.js'
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {

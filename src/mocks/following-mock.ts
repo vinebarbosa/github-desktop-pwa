@@ -1,4 +1,4 @@
-import type { FollowingUserData } from '@/modules/following/http/get-following-users';
+import type { FollowingUserData } from '@/modules/following/http/dto/following-user-data';
 import type { PaginatedResult } from '@/modules/shared/types/paginated-result';
 import { getPaginationStatus } from '@/modules/shared/utils/pagination';
 

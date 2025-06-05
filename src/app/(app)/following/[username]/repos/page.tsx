@@ -12,8 +12,8 @@ import type { DefaultPageProps } from '@/modules/shared/types/default-page-props
 import { getApiPageNumber } from '@/modules/shared/utils/pagination';
 import Link from 'next/link';
 
+import { luizaHubServiceFactory } from '@/modules/shared/factories/luizahub-service-factory';
 import { ArrowLeftIcon } from '@/modules/shared/icons/arrow-left';
-import { luizaHubServiceFactory } from '@/modules/shared/utils/luizahub-service-factory';
 interface FollowingRepositoriesPageProps extends DefaultPageProps {
   params: Promise<{ username: string }>;
 }

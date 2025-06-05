@@ -13,5 +13,5 @@ export default defineConfig({
       TEST_PASSWORD: process.env.TEST_PASSWORD
     }
   },
-  chromeWebSecurity: false,
+  chromeWebSecurity: false
 });

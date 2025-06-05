@@ -2,13 +2,13 @@ import { auth } from '@/modules/auth';
 import { signOutAction } from '@/modules/auth/server-actions/sign-out-action';
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar';
 import { Button } from '@/modules/shared/components/ui/button';
-import { luizaHubServiceFactory } from '@/modules/shared/utils/luizahub-service-factory';
+import { luizaHubServiceFactory } from '@/modules/shared/factories/luizahub-service-factory';
 
 export default async function ProfilePage() {
   const session = await auth();
   const authorizationToken = session?.accessToken;
 
-  const service = luizaHubServiceFactory()
+  const service = luizaHubServiceFactory();
 
   const user = await service.getUser({ authorizationToken });
 

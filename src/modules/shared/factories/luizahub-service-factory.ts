@@ -1,5 +1,5 @@
-import { MockLuizaHubService } from '@/modules/shared/utils/mock-luizahub-service';
-import { GithubService } from '../service/github-service';
+import { MockLuizaHubService } from '@/modules/shared/services/mock-luizahub-service';
+import { GithubService } from '../services/github-service';
 import type { LuizaHubService } from '../types/luiza-hub';
 
 export function luizaHubServiceFactory() {
@@ -9,7 +9,7 @@ export function luizaHubServiceFactory() {
 
   if (isTest) {
     service = new MockLuizaHubService();
-    return service
+    return service;
   }
 
   service = new GithubService();

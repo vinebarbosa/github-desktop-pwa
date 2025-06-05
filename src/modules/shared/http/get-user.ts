@@ -1,15 +1,10 @@
-interface GetUserParams {
-  authorizationToken?: string;
-  username?: string;
-}
+import type { GetUserParams } from './dto/get-user-params';
+import type { UserResponseData } from './dto/get-user-response-data';
 
-export interface UserData {
-  login: string;
-  avatar_url: string;
-  name: string;
-}
-
-export async function getUser({ username, authorizationToken }: GetUserParams): Promise<UserData> {
+export async function getUser({
+  username,
+  authorizationToken
+}: GetUserParams): Promise<UserResponseData> {
   const headers: HeadersInit = {
     Accept: 'application/vnd.github.v3+json'
   };
@@ -38,6 +33,6 @@ export async function getUser({ username, authorizationToken }: GetUserParams): 
     );
   }
 
-  const data: UserData = await response.json();
+  const data: UserResponseData = await response.json();
   return data;
 }

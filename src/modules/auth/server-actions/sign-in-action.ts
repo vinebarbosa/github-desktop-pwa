@@ -1,7 +1,7 @@
-'use server'
+'use server';
 
-import { signInFactory } from '../utils/sign-in-factory'
+import { signInFactory } from '../factories/sign-in-factory';
 
 export async function signInAction(formData: FormData) {
-  return await signInFactory(formData)
+  return await signInFactory(formData);
 }

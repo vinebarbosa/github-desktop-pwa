@@ -1,14 +1,5 @@
-export interface CreateRepositoryParams {
-  name: string;
-  authorizationToken?: string;
-}
-
-export interface CreatedRepositoryData {
-  id: number;
-  name: string;
-  full_name: string;
-  description: string | null;
-}
+import type { CreateRepositoryParams } from './dto/create-repository-params';
+import type { CreatedRepositoryData } from './dto/created-repository-data';
 
 export async function createRepository({
   name,
@@ -36,9 +27,7 @@ export async function createRepository({
       if (response.status === 422) {
         throw new Error('Dados inválidos.');
       }
-      throw new Error(
-        'Falha ao criar repositório'
-      );
+      throw new Error('Falha ao criar repositório');
     }
 
     const data: CreatedRepositoryData = await response.json();

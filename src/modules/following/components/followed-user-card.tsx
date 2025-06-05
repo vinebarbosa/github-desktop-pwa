@@ -1,10 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/modules/shared/components/ui/avatar';
-import type { UserData } from '@/modules/shared/http/get-user';
+import type { UserResponseData } from '@/modules/shared/http/dto/get-user-response-data';
 import { ROUTES } from '@/modules/shared/routes';
 import Link from 'next/link';
 
 type FollowedUserCardProps = {
-  getUser: () => Promise<UserData>;
+  getUser: () => Promise<UserResponseData>;
 };
 
 export async function FollowedUserCard({ getUser }: FollowedUserCardProps) {
